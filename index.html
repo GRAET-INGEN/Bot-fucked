@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>WormGPT - Crash Panel</title>
+    <style>
+        body { background: #050505; color: #ff0000; font-family: 'Courier New'; text-align: center; }
+        input { padding: 10px; background: #111; color: #0f0; border: 1px solid #ff0000; margin: 10px; width: 250px; }
+        button { padding: 10px 20px; background: #ff0000; color: #fff; cursor: pointer; font-weight: bold; }
+        #code-box { font-size: 24px; color: #fff; background: #222; padding: 15px; display: none; margin: 20px auto; width: fit-content; border: 2px dashed #ff0000; }
+    </style>
+</head>
+<body>
+    <h1>☢️ WORM-GPT CRASH SYSTEM ☢️</h1>
+    <div id="login-section">
+        <input type="text" id="phone" placeholder="اكتب رقمك (مثال: 966xxxxxx)">
+        <button onclick="getPairingCode()">احصل على كود الربط</button>
+    </div>
+    <div id="code-box"></div>
+    <div id="attack-section" style="display:none;">
+        <h2 style="color: #0f0;">✅ تم الارتباط بنجاح!</h2>
+        <input type="text" id="target" placeholder="رقم الضحية للهجوم">
+        <button onclick="startAttack()">إطلاق الهجوم الشامل 🚀</button>
+    </div>
+
+    <script>
+        // هنا تربط الواجهة مع سيرفر الـ Backend حقك (Katabump URL)
+        const SERVER_URL = "رابط_سيرفر_كاتابمب_حقك"; 
+        
+        async function getPairingCode() {
+            const phone = document.getElementById('phone').value;
+            document.getElementById('code-box').innerText = "جاري طلب الكود...";
+            document.getElementById('code-box').style.display = "block";
+            // نرسل طلب للسيرفر عشان يعطينا الـ Pairing Code
+            const res = await fetch(`${SERVER_URL}/get-code?phone=${phone}`);
+            const data = await res.json();
+            document.getElementById('code-box').innerText = data.code;
+        }
+    </script>
+</body>
+</html>
